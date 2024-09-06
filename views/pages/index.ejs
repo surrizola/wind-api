@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+<% include ../partials/nav.ejs %>
+
+  <body>
+
+
+
+    <div class="jumbotron text-center">
+      <div class="container">
+        <a href="/" class="lang-logo">
+          <!--
+      <img src="/wind-lean.jpeg"> -->
+        </a>
+        <h1>
+          <%=data.speed %> knts
+        </h1>
+
+        <h3>Gust <%=data.gust %> knts</h3>
+        <h3>
+          <%=data.dirCard %> º - <%=data.dir %> º
+        </h3>
+        <h4>
+          <%=data.date %>
+        </h4>
+        <h4>
+          <%=dataFull.dlg_title %>
+        </h4>
+
+      </div>
+    </div>
+
+
+    
+  </body>
+
+</html>
