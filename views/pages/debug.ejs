@@ -17,9 +17,9 @@
     <div class="container d-lg-none">
       <h4 class="alert alert-info text-center" role="alert"> Wind chart history</h4>
       <div class="col-lg-12" role="alert">
-        <%-decodeURIComponent(dataFull.wind.chart.history.series[0].data) + "</table>" %>
+        <%-decodeURIComponent(data.dataFull.wind.chart.history.series[0].data) + "</table>" %>
           <%/* 
-          = JSON.stringify(dataFull.wind.chart.history, null, 2)
+          = JSON.stringify(data.dataFull.wind.chart.history, null, 2)
           */%>
       </div>
     </div>
@@ -31,13 +31,13 @@
         Info
       </div>
       <div class="col-lg-6">
-        <%-decodeURIComponent(dataFull.wind.latest) %>
+        <%-decodeURIComponent(data.dataFull.wind.latest) %>
 
 
       </div>
 
       <div class="col-lg-6">
-        <%-decodeURIComponent(dataFull.tide.latest) %>
+        <%-decodeURIComponent(data.dataFull.tide.latest) %>
       </div>
     </div>
 
@@ -45,13 +45,13 @@
     <div class="container">
       <div class="col-lg-12" role="alert">
         "dataFull.wind"
-        <pre><%= JSON.stringify(dataFull.wind, null, 2) %></pre>
+        <pre><%= JSON.stringify(data.dataFull.wind, null, 2) %></pre>
       </div>
     </div>
 
     <div class="col-lg-12" role="alert">
       
-        <pre><%= JSON.stringify(dataFull, null, 2) %></pre>
+        <pre><%= JSON.stringify(data.dataFull, null, 2) %></pre>
     </div>
     </div>
 
