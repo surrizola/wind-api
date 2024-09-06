@@ -8,22 +8,102 @@
 
   <body>
 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 
-
-
-
+    <!--https://www.highcharts.com/demo/highcharts/polar-wind-rose-->
+    <div class="container">
     
-    <div class="container d-lg-none">
-      <h4 class="alert alert-info text-center" role="alert"> Wind chart history</h4>
-      <div class="col-lg-12" role="alert">
-        <%-decodeURIComponent(data.dataFull.wind.chart.history.series[0].data) + "</table>" %>
-          <%/* 
-          = JSON.stringify(data.dataFull.wind.chart.history, null, 2)
-          */%>
+      <div class="col-lg-6" >
+
+        <figure class="highcharts-figure">
+          <div id="container-rose"></div>
+          <p class="highcharts-description">
+             Datos de pilote norden
+          </p>
+        </figure>
       </div>
+
+      <div class="col-lg-6" >
+
+        <figure class="highcharts-figure">
+          <div id="container-time"></div>
+          <p class="highcharts-description">
+             Chart de time gust
+          </p>
+        </figure>
+      </div>
+
+  
     </div>
 
+
+
+
+    <div class="container">
+      <div class="alert alert-info text-center" role="alert">
+        Gusts last 24hs (<%-(new Date().toString())%>)
+      </div>
+      <div class="col-lg-6 table-responsive">      
+        <table   class="table table-striped table-sm">
+          <thead>
+              <tr>
+                <th>Time</th> <th>Gust</th> 
+              </tr>
+          </thead>
+          <tbody>
+            <% 
+              var items = data.dataFull.wind.chart.gust.series[0].data;
+              var wind  = data.dataFull.wind.chart.gust.series[1].data;              
+              items.forEach(function(item) { %>            
+              <tr>
+                <td><%-new Date(item[0])%></td>
+                <td><%-item[1]%></td>                               
+              </tr>
+            <% }) %>
+   
+          </tbody>
+      </table>
+      </div>
+      <div class="col-lg-6" >      
+        <table class="table table-striped table-sm">
+          <thead>
+              <tr>
+                <th>Time</th> <th>Wind</th> 
+              </tr>
+          </thead>
+          <tbody>
+            <% 
+              var items = data.dataFull.wind.chart.gust.series[1].data;              
+              items.forEach(function(item) { %>            
+              <tr>
+                <td><%-new Date(item[0])%></td>
+                <td><%-item[1]%></td>                               
+              </tr>
+            <% }) %>
+   
+          </tbody>
+      </table>
+      </div>
+
+      <div class="container">
+
+      <div class="col-lg-6" >      
+        serie Gustt
+        <pre><%= JSON.stringify(data.dataFull.wind.chart.gust.series[0].data, null, 2) %></pre>
+      
+      </div>
+      <div class="col-lg-6" >      
+        serie wind
+        <pre><%= JSON.stringify(data.dataFull.wind.chart.gust.series[1].data, null, 2) %></pre>
+      </div>
+  
+    </div>
 
   
     <div class="container">
@@ -32,30 +112,207 @@
       </div>
       <div class="col-lg-6">
         <%-decodeURIComponent(data.dataFull.wind.latest) %>
-
-
       </div>
 
       <div class="col-lg-6">
         <%-decodeURIComponent(data.dataFull.tide.latest) %>
       </div>
+
+      <dic class="container">
+        <div class="col-lg-6 d-none" >
+          <%-decodeURIComponent(data.dataFull.wind.chart.history.series[0].data) + "</table>" %>
+            <%/* 
+            = JSON.stringify(data.dataFull.wind.chart.history, null, 2)
+            */%>
+        </div>
     </div>
 
-
+<!--
     <div class="container">
-      <div class="col-lg-12" role="alert">
-        "dataFull.wind"
+      <div class="alert alert-info text-center" role="alert">
+        FULL DATA
+      </div>
+      <div class="col-lg-12" >      
         <pre><%= JSON.stringify(data.dataFull.wind, null, 2) %></pre>
       </div>
     </div>
-
-    <div class="col-lg-12" role="alert">
-      
-        <pre><%= JSON.stringify(data.dataFull, null, 2) %></pre>
-    </div>
-    </div>
+-->
 
 
+
+<script>
+  Highcharts.chart('container-rose', {
+      data: {
+          table: 'freq_history_1',
+          startRow: 1,
+          endRow: 17,
+          endColumn: 7
+      },
+  
+      chart: {
+          polar: true,
+          type: 'column'
+      },
+  
+      title: {
+          text: 'Wind rose para pilote norden',
+          align: 'left'
+      },
+  
+      subtitle: {
+          text: 'Source: gaucho wind',
+          align: 'left'
+      },
+  
+      pane: {
+          size: '85%'
+      },
+  
+      legend: {
+          align: 'right',
+          verticalAlign: 'top',
+          y: 100,
+          layout: 'vertical'
+      },
+  
+      xAxis: {
+          tickmarkPlacement: 'on'
+      },
+  
+      yAxis: {
+          min: 0,
+          endOnTick: false,
+          showLastLabel: true,
+          title: {
+              text: 'Frequency (%)'
+          },
+          labels: {
+              format: '{value}%'
+          },
+          reversedStacks: false
+      },
+  
+      tooltip: {
+          valueSuffix: '%'
+      },
+  
+      plotOptions: {
+          series: {
+              stacking: 'normal',
+              shadow: false,
+              groupPadding: 0,
+              pointPlacement: 'on'
+          }
+      }
+  });
+  
+
+
+  // Este es el de wind
+var gusts = [
+  <% 
+              var items = data.dataFull.wind.chart.gust.series[0].data;
+              items.forEach(function(item) { 
+                
+%>          
+                [<%-item[0]%>
+                ,
+                <%-item[1]%>],
+            <% }) %>
+              ];
+
+
+ // Este es el de wind
+ var wind = [
+  <% 
+              var items = data.dataFull.wind.chart.gust.series[1].data;
+              items.forEach(function(item) { 
+                
+%>          
+                [<%-item[0]%>
+                ,
+                <%-item[1]%>],
+            <% }) %>
+              ];
+
+
+
+
+  // Data retrieved from https://www.vikjavev.no/ver/snjomengd
+  //var gusts =[<%=data.dataFull.wind.chart.gust.series[0].data%>];
+
+  
+
+  gusts.forEach(function(item){
+    console.log(item);
+  });
+
+Highcharts.chart('container-time', {
+    chart: {
+        type: 'spline'
+    },
+    title: {
+        text: 'Wind en Pilote norden',
+        align: 'left'
+    },
+    subtitle: {
+        text: 'Viento y racha de',
+        align: 'left'
+    },
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            // don't display the year
+            month: '%e. %b',
+            year: '%b'
+        },
+        title: {
+            text: 'Date'
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Knots'
+        },
+        min: 0
+    },
+    tooltip: {
+        headerFormat: '<b>{series.name}</b><br>',
+        pointFormat: '{point.x:%e. %b}: {point.y:.2f} kn'
+    },
+
+    plotOptions: {
+        series: {
+            marker: {
+                symbol: 'circle',
+                fillColor: '#FFFFFF',
+                enabled: true,
+                radius: 2.5,
+                lineWidth: 1,
+                lineColor: null
+            }
+        }
+    },
+
+    colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+    // Define the data points. All series have a year of 1970/71 in order
+    // to be compared on the same x axis. Note that in JavaScript, months start
+    // at 0 for January, 1 for February etc.
+    series: [
+    {
+          name: 'Wind',
+          data: wind
+        },
+        {
+          name: 'Gust',
+          data: gusts
+        }
+    ]
+});
+
+  
+      </script>
+  
   </body>
 
 </html>

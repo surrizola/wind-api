@@ -6,7 +6,7 @@ const request = require('request');
 const pilote = require('./pilote');
 
 
-
+//process.env.TZ = "America/New_York";
 
 function callstats(callback){
   pilote.get_data(function(results){
