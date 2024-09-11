@@ -14,27 +14,26 @@
 
     <div class="jumbotron text-center">
       <div class="container">
-        <a href="/" >
+      <!--   <a href="/" >
           <div class="compass">
             <div class="direction">
               <p><%=data.dirCard %><span> <%=data.speed %> knts</span></p>
             </div>
             <div class="arrow ne"></div>
           </div>
-        </a>
+        </a> -->
         <h1 class="display-1"> 
           <%=data.speed %> knts
         </h1>
-        <h3 class="display-3">Gust <%=data.gust %> knts</h1>
-        <h4 class="display-4">
+        <h2 >
           <%=data.dirCard %> º - <%=data.dir %> º
-        </h4>
-        <h4>
+        </h2>
+        <h3 >racha <%=data.gust %> knts</h1>
+      
+        <p>
           <%=data.date %>
-        </h4>
-        <h4>
           <%=data.dataFull.dlg_title %>
-        </h4>
+        </p>
 
       </div>
     </div>
