@@ -8,38 +8,111 @@
 <% include ../partials/nav.ejs %>
 
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
 
-
-
-    <div class="jumbotron text-center">
-      <div class="container">
-      <!--   <a href="/" >
-          <div class="compass">
-            <div class="direction">
-              <p><%=data.dirCard %><span> <%=data.speed %> knts</span></p>
-            </div>
-            <div class="arrow ne"></div>
-          </div>
-        </a> -->
-        <h1 class="display-1"> 
-          <%=data.speed %> knts
-        </h1>
-        <h2 >
-          <%=data.dirCard %> º - <%=data.dir %> º
-        </h2>
-        <h3 >racha <%=data.gust %> knts</h1>
       
-        <p>
-          <%=data.date %>
-          <%=data.dataFull.dlg_title %>
-        </p>
 
+    <div class=" d-flex justify-content-center ">
+      <div class="card text-center col-md-4 shadow-4">
+        <div class="card-header">
+          <%=data.dataFull.dlg_title %>
+        </div>
+        <div class="card-body">
+          <canvas id="windCanvas" width="180" height="180"></canvas>
+          <h1 class="display-1 card-title">
+            <%=data.speed %> knts
+          </h1>
+          <h5 class="card-title">
+            <%=data.dirCard %> º - <%=data.dir %> º
+          </h5>
+          <h5 class="card-title">gust <%=data.gust %> knts</h5>
+          <!--         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+ -->
+        </div>
+        <div class="card-footer text-muted">
+          <%=data.date %>
+        </div>
       </div>
     </div>
 
+  <!--   
+    <div class=" text-center">
+      <div class="container border border-primary rounded col-md-4 shadow-4">
+        <img src="/wind.png">
+        <h1 class="display-1">
+          <%=data.speed %> knts
+        </h1>
+        <h2>
+          <%=data.dirCard %> º - <%=data.dir %> º
+        </h2>
+        <h3>racha <%=data.gust %> knts</h1>
 
-    
+            <p>
+              <%=data.date %> <br>
+                <%=data.dataFull.dlg_title %>
+            </p>
+
+      </div>
+    </div>
+ -->
+
+
+    <script>
+      function drawWindDirection(degrees) {
+           const canvas = document.getElementById('windCanvas');
+           const ctx = canvas.getContext('2d');
+           const centerX = canvas.width / 2;
+           const centerY = canvas.height / 2;
+           const arrowLength = 80;
+           const arrowWidth = 8;
+           const arrowHeadSize = 40;
+
+           ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+           // Draw the circle (optional, for reference)
+           ctx.beginPath();
+           ctx.arc(centerX, centerY, 80, 0, 2 * Math.PI);
+           ctx.strokeStyle = '#ccc';
+           ctx.stroke();
+
+           // Convert the direction so the arrow points in the direction the wind is going
+           const adjustedDegrees = degrees - 90;
+
+           // Calculate arrow end position
+           const endX = centerX + arrowLength * Math.cos(adjustedDegrees * Math.PI / 180);
+           const endY = centerY + arrowLength * Math.sin(adjustedDegrees * Math.PI / 180);
+
+           // Draw the arrow line
+           ctx.beginPath();
+           ctx.moveTo(centerX, centerY);
+           ctx.lineTo(endX, endY);
+           ctx.lineWidth = arrowWidth;
+           ctx.strokeStyle = 'blue'; // Arrow color
+           ctx.stroke();
+
+           // Draw the arrowhead
+           ctx.beginPath();
+           const headLeftX = endX - arrowHeadSize * Math.cos((adjustedDegrees - 150) * Math.PI / 180);
+           const headLeftY = endY - arrowHeadSize * Math.sin((adjustedDegrees - 150) * Math.PI / 180);
+           const headRightX = endX - arrowHeadSize * Math.cos((adjustedDegrees + 150) * Math.PI / 180);
+           const headRightY = endY - arrowHeadSize * Math.sin((adjustedDegrees + 150) * Math.PI / 180);
+
+           ctx.moveTo(endX, endY);
+           ctx.lineTo(headLeftX, headLeftY);
+           ctx.lineTo(headRightX, headRightY);
+           ctx.closePath();
+           ctx.fillStyle = 'blue'; 
+           ctx.fill();
+       }
+
+       // Example: Draw wind direction at 45 degrees (NE)
+       drawWindDirection(<%=data.dir %>);
+         // You can change the degrees to represent different directions
+         // Example: drawWindDirection(270); for W (270 degrees)
+     </script>
+
   </body>
 
 </html>

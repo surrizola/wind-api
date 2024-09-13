@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5001
-const cool = require('cool-ascii-faces')
 const request = require('request');
 const pilote = require('./pilote');
 
@@ -27,21 +26,19 @@ express()
     callstats(function(data){
       res.render('pages/debug', {data:data});
     })
-    
   })
 
 
   .get('/', (req, res) => {
-    callstats(function(data, dataFull){
-      res.render('pages/index', {data:data, dataFull: dataFull});
+    callstats(function(data){
+      res.render('pages/index', {data:data});
     })
     
   })
-  .get('/cool', (req, res) => res.send(cool()))
 
 
-  .get('/wind', (req, res) =>  callstats(function(data){
-    res.send(data);
+  .get('/wind', (req, res) =>  callstats(function(data, dataFull){
+    res.send(dataFull);
   })
 
 
