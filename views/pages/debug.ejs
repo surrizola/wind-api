@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <% include ../partials/header.ejs %>
+  <%- include ('../partials/header.ejs') %>
 </head>
-<% include ../partials/nav.ejs %>
+  
 
   <body>
+    <%- include ('../partials/nav.ejs') %>
 
+
+    
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -110,7 +111,7 @@
       
         <%-decodeURIComponent(data)  %>
         
-          <% /*=JSON.stringify(data.dataFull.wind.chart.history, null, 2) */%>
+          <%/*=JSON.stringify(data.dataFull.wind.chart.history, null, 2) */%>
       
     </div>
 

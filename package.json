@@ -11,19 +11,20 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "await": "^0.2.6",
-    "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "fetch": "^1.1.0",
-    "node-html-parser": "^1.2.16",
-    "request": "^2.88.2"
+    "await": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "fetch": "latest",
+    "node-html-parser": "latest",
+    "request": "latest",
+    "axios": "latest"
   },
   "devDependencies": {
     "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/zzzzz"
   },
   "keywords": [
     "node",

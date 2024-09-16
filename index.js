@@ -1,15 +1,17 @@
 const express = require('express')
 const path = require('path')
-const PORT = process.env.PORT || 5001
+const PORT = process.env.PORT || 3000
 const request = require('request');
 const pilote = require('./pilote');
+const bodyParser = require('body-parser');
 
 
 //process.env.TZ = "America/New_York";
 
 function callstats(callback){
+  console.log("get data from index");
   pilote.get_data(function(results){
-    console.log(results)
+    //console.log(results)
     callback( results);
   });
   
@@ -18,6 +20,7 @@ function callstats(callback){
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
+  .use(bodyParser.urlencoded({extended:false}))
   .set('view engine', 'ejs')
   //.get('/', (req, res) => res.render('pages/index'))
   .get('/db2', (req, res) => res.render('pages/db'))
@@ -30,6 +33,7 @@ express()
 
 
   .get('/', (req, res) => {
+    console.log("home")
     callstats(function(data){
       res.render('pages/index', {data:data});
     })
@@ -48,4 +52,6 @@ express()
 
 
 
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  .listen(PORT, () => console.log(`Gaucho WIND Listening on ${ PORT }`))
+
+  console.log('Gaucho WIND  Server running at http://127.0.0.1:' + PORT + '/');
