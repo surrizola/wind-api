@@ -14,55 +14,34 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"></script>
 
-
-    <div class="container">
-
-      <div class="d-flex justify-content-center">
-        <div class="card text-center col-12 col-md-8 col-lg-6 shadow-4">
-          <div class="card-header">
-            <%=data.dataFull.dlg_title %>
-          </div>
-          <div class="card-body">
-            <canvas id="windCanvas" width="180" height="180"></canvas>
-
-            <h1 class="card-title" >
-              <%=data.speed %> knts
-            </h1>
-            <h3 >
-              <%=data.dirCard %> º - <%=data.dir %> º
-            </h3>
-            <h4 >gust <%=data.gust %> knts</h4>
-            <!--         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
- -->
-          </div>
-          <div class="card-footer text-muted">
-            <%=data.date %>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="card shadow-lg rounded">
+              <div class="card-header bg-primary text-white text-center">
+                <h3 class="mb-0"><%=data.dataFull.dlg_title %></h3>
+              </div>
+              <div class="card-body text-center">
+                <div class="mb-4">
+                  <canvas id="windCanvas" width="200" height="200"></canvas>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h1 class="display-4"><%=data.speed %> knts</h1>
+                  </div>
+                  <div class="col-12">
+                    <h3 class="mb-2"><%=data.dirCard %> º - <%=data.dir %> º </h3>
+                    <h4 class="mb-0">gust <%=data.gust %> knts</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-muted text-center">
+                <%=data.date %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <!--   
-    <div class=" text-center">
-      <div class="container border border-primary rounded col-md-4 shadow-4">
-        <img src="/wind.png">
-        <h1 class="display-1">
-          <%=data.speed %> knts
-        </h1>
-        <h2>
-          <%=data.dirCard %> º - <%=data.dir %> º
-        </h2>
-        <h3>racha <%=data.gust %> knts</h1>
-
-            <p>
-              <%=data.date %> <br>
-                <%=data.dataFull.dlg_title %>
-            </p>
-
-      </div>
-    </div>
- -->
-
 
     <script>
       function drawWindDirection(degrees) {
@@ -70,9 +49,9 @@
         const ctx = canvas.getContext('2d');
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
-        const arrowLength = 80;
-        const arrowWidth = 8;
-        const arrowHeadSize = 40;
+        const arrowLength = 100;
+        const arrowWidth = 10;
+        const arrowHeadSize = 20;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -118,6 +97,9 @@
       // Example: drawWindDirection(270); for W (270 degrees)
     </script>
 
+
+
+    <%- include ('../partials/close.ejs') %>
 
 
 </body>

@@ -41,9 +41,55 @@
 
 
 
-   
 
-    <div class="container row sr-only">
+    <div class="container row">
+      <div class="col-lg-12 alert alert-info text-center">
+        Gusts last 24hs (<%-(new Date().toString())%>)
+      </div>
+      <div class="col-lg-6 table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Gust</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% var items=data.dataFull.wind.chart.gust.series[0].data; var
+              wind=data.dataFull.wind.chart.gust.series[1].data; items.forEach(function(item) { %>
+              <tr>
+                <td><%-new Date(item[0])%></td>
+                <td><%-item[1]%></td>
+              </tr>
+              <% }) %>
+
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="col-lg-6">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Wind</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% var items=data.dataFull.wind.chart.gust.series[1].data; items.forEach(function(item) { %>
+              <tr>
+                <td><%-new Date(item[0])%></td>
+                <td><%-item[1]%></td>
+              </tr>
+              <% }) %>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="container row">
       <div class="alert alert-info text-center" role="alert">
         Info
       </div>
@@ -57,7 +103,7 @@
     </div>
 
   
-    <div class="container  sr-only">
+    <div class="container">
       <!-- d-none -->
       <div class="col-lg-12 ">
         <%-decodeURIComponent(data.dataFull.wind.chart.history.series[0].data) + "</table>" %>
@@ -65,7 +111,16 @@
       </div>
     </div>
 
-  
+    <div class="container">
+     <pre>
+      
+        <%-decodeURIComponent(data)  %>
+        
+          <%/*=JSON.stringify(data.dataFull.wind.chart.history, null, 2) */%>
+      
+    </div>
+
+
 
 
 

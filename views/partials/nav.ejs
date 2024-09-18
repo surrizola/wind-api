@@ -1,56 +1,45 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <div class="container-fluid">
-    
-    <!-- Botón hamburguesa para dispositivos pequeños -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a href="/" class="nav-link">
-            <span class="glyphicon glyphicon-home"></span> Wind
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/debug">Debug</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        Gauchowind
-      </span>
-    </div>
-  </div>
-</nav>
-<!--
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-    <ul class="nav navbar-nav">
-      <li >
-        <a href="/"><span class="glyphicon glyphicon-home"></span> Wind</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand text-right" href="#">Gaucho Wind</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="mainNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">
+          <i class="fas fa-home"></i> Home
+          <span class="sr-only">(current)</span>
+        </a>
       </li>
-      <li >
-        <a href="/debug"><span class="glyphicon glyphicon-user"></span> Debug</a>
-      </li>
-    </ul>
-<   <ul class="nav navbar-nav navbar-right">
-      <li class="navbar-right">
-        <a href=""><span class="glyphicon glyphicon-book"></span> GauchoWind</a>
+      <li class="nav-item">
+        <a class="nav-link" href="/debug">
+          <i class="fas fa-chart-bar"></i> Charts
+        </a>
       </li>
     </ul>
 
   </div>
 </nav>
--->
+
+
 <script>
   $(document).ready(function () {
+
+    const currentUrl = window.location.pathname;
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-item a');
+
+    navLinks.forEach(link => {
+      if (link.href.endsWith(currentUrl)) {
+        link.classList.add('active');
+      }
+    });
+/*
     const path = window.location.pathname;
     console.log(path)
     const escapedPath = $.escapeSelector(path);
     console.log(escapedPath)
     $(`a[href="${path}"]`).addClass('active');
+*/
 });
 </script>
