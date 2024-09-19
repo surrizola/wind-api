@@ -19,11 +19,11 @@
           <div class="col-12 col-md-8 col-lg-6">
             <div class="card shadow-lg rounded">
               <div class="card-header bg-primary text-white text-center">
-                <h3 class="mb-0"><%=data.dataFull.dlg_title %></h3>
+                <h4 class="mb-0"><%=data.dataFull.dlg_title %></h4>
               </div>
               <div class="card-body text-center">
                 <div class="mb-4">
-                  <canvas id="windCanvas" width="200" height="200"></canvas>
+                  <canvas id="windCanvas2" width="200" height="200"></canvas>
                 </div>
                 <div class="row">
                   <div class="col-12">
@@ -43,23 +43,46 @@
         </div>
       </div>
 
+
+<!--       <div class="container row">
+
+        <div id="windCompass">
+          <div class="compass-arrow"></div>
+          <div class="compass-direction N">N</div>
+          <div class="compass-direction NE">NE</div>
+          <div class="compass-direction E">E</div>
+          <div class="compass-direction SE">SE</div>
+          <div class="compass-direction S">S</div>
+          <div class="compass-direction SW">SW</div>
+          <div class="compass-direction W">W</div>
+          <div class="compass-direction NW">NW</div>
+        </div>
+
+
+
+
+      </div> -->
+
+
     <script>
       function drawWindDirection(degrees) {
-        const canvas = document.getElementById('windCanvas');
+        const canvas = document.getElementById('windCanvas2');
         const ctx = canvas.getContext('2d');
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
-        const arrowLength = 100;
+        const arrowLength = 50;
         const arrowWidth = 10;
-        const arrowHeadSize = 20;
+        const arrowHeadSize = 30;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Draw the circle (optional, for reference)
-        ctx.beginPath();
+/*         ctx.beginPath();
         ctx.arc(centerX, centerY, 80, 0, 2 * Math.PI);
         ctx.strokeStyle = '#ccc';
         ctx.stroke();
+ */
+
 
         // Convert the direction so the arrow points in the direction the wind is going
         const adjustedDegrees = degrees - 90;
@@ -69,13 +92,13 @@
         const endY = centerY + arrowLength * Math.sin(adjustedDegrees * Math.PI / 180);
 
         // Draw the arrow line
-        ctx.beginPath();
+/*         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.lineTo(endX, endY);
         ctx.lineWidth = arrowWidth;
-        ctx.strokeStyle = 'blue'; // Arrow color
+        ctx.strokeStyle = 'blue'; 
         ctx.stroke();
-
+ */
         // Draw the arrowhead
         ctx.beginPath();
         const headLeftX = endX - arrowHeadSize * Math.cos((adjustedDegrees - 150) * Math.PI / 180);
@@ -98,10 +121,26 @@
     </script>
 
 
+    <style>
+
+#windCanvas2 {
+      background-image: url('/compass-1.png'); /* Reemplaza con la ruta de tu imagen */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+
+
+#windCompass {
+  transform: rotate(0deg); 
+}
+
+    </style>
+
 
     <%- include ('../partials/close.ejs') %>
 
-
+    
 </body>
 
 </html>
