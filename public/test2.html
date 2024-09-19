@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brújula</title>
+    <style>
+        .compass {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            position: relative;
+            margin: 50px auto;
+        }
+
+        .needle {
+            width: 80px;
+            height: 5px;
+            background-color: #333;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 50%;
+            transform: translate(-50%, -50%) rotate(0deg); /* Inicialmente apunta al norte */
+        }
+
+        .north {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+        }
+
+        .south {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+        }
+
+        .east {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+
+        .west {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="compass">
+        <div class="needle"></div>
+        <div class="north">N</div>
+        <div class="south">S</div>
+        <div class="east">E</div>
+        <div class="west">W</div>
+    </div>
+
+    <script>
+        function setCompassDirection(direction) {
+            const needle = document.querySelector('.needle');
+            let angle = 0;
+
+            switch (direction) {
+                case 'N':
+                    angle = 0;
+                    break;
+                case 'NE':
+                    angle = 45;
+                    break;
+                case 'E':
+                    angle = 90;
+                    break;
+                case 'SE':
+                    angle = 135;
+                    break;
+                case 'S':
+                    angle = 180;
+                    break;
+                case 'SW':
+                    angle = 225;
+                    break;
+                case 'W':
+                    angle = 270;
+                    break;
+                case 'NW':
+                    angle = 315;
+                    break;
+                default:
+                    angle = 0;
+            }
+
+            needle.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+        }
+
+        // Ejemplo de uso:
+        setCompassDirection('N'); 
+    </script>
+</body>
+</html>
